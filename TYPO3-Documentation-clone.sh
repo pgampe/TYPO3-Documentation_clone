@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This script is in the public domain.
+
 # Enter your username for typo3.org here
 username=""
 dryrun=true
