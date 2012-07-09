@@ -2,22 +2,26 @@
 
 # Enter your username for typo3.org here
 USERNAME=""
+dryrun=true
 
 if [[ -z "$USERNAME" ]]; then
-  read -p "Please enter your typo3.org username: " -r USERNAME
+	read -p "Please enter your typo3.org username: " -r USERNAME
 fi
 
 # Fetch the list of projects
 list_of_projects="$(ssh "$USERNAME@review.typo3.org" -p 29418 "gerrit ls-projects" | grep -e "^Documentation/TYPO3")"
 
-# Dry run mode, will only output the commands
-echo "$list_of_projects" \
-	| sed 's/ /\n/g' \
-	| parallel --jobs 1 'echo "mkdir -p $(pwd)/{1}"'
+if [[ "$dryrun" = "true" ]]
+then
+	# Dry run mode, will only output the commands
+	echo "$list_of_projects" \
+		| sed 's/ /\n/g' \
+		| parallel --jobs 1 'echo "mkdir -p $(pwd)/{1}"'
 
-echo "$list_of_projects" \
-	| sed 's/ /\n/g' \
-	| parallel --jobs 2 'echo "cd $(pwd)/{1}; echo {1}; git clone --recursive git://git.typo3.org/{1}.git ."'
+	echo "$list_of_projects" \
+		| sed 's/ /\n/g' \
+		| parallel --jobs 2 'echo "cd $(pwd)/{1}; echo {1}; git clone --recursive git://git.typo3.org/{1}.git ."'
+fi
 
 # Execute commands
 echo "$list_of_projects" \
