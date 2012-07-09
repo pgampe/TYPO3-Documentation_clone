@@ -21,7 +21,7 @@ for project in $list_of_projects
 do
 	echo -n $(tput setf 2)
 	echo "$project"
-	echo -n $(tput tput sgr0)
+	echo -n $(tput sgr0)
 
 	# Create a new directory for the git repository.
 	project_dir="$(pwd)/$project"
