@@ -6,10 +6,20 @@
 
 # Enter your username for typo3.org here
 username=""
-dryrun=true
 
 if [[ -z "$username" ]]; then
 	read -p "Please enter your typo3.org username: " -r username
+fi
+
+read -p "Do you want to actually run the commands? [y/N] " answer
+
+if [[ "$answer" = [yYjJ] ]]
+then
+	dryrun=false
+	echo "Performing the actual commands."
+else
+	dryrun=true
+	echo "Performing a dry run only."
 fi
 
 # Fetch the list of projects
