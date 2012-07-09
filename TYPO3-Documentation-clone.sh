@@ -27,6 +27,8 @@ fi
 # Fetch the list of projects
 list_of_projects="$(ssh "$username@review.typo3.org" -p 29418 "gerrit ls-projects" | grep -e "^Documentation/TYPO3")"
 
+start_dir="$(pwd)"
+
 if [[ "$dryrun" = "true" ]]
 then
 	for project in $list_of_projects
@@ -45,5 +47,8 @@ else
 		mkdir -p "$project_dir"
 		cd "$project_dir"
 		git clone --recursive "git://git.typo3.org/$project.git" .
+
+		# Return to the old directory.
+		cd "$start_dir"
 	done
 fi
