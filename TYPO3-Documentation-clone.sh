@@ -29,21 +29,21 @@ list_of_projects="$(ssh "$username@review.typo3.org" -p 29418 "gerrit ls-project
 
 if [[ "$dryrun" = "true" ]]
 then
-	# Dry run mode, will only output the commands
-	echo "$list_of_projects" \
-		| sed 's/ /\n/g' \
-		| parallel --jobs 1 'echo "mkdir -p $(pwd)/{1}"'
-
-	echo "$list_of_projects" \
-		| sed 's/ /\n/g' \
-		| parallel --jobs 2 'echo "cd $(pwd)/{1}; echo {1}; git clone --recursive git://git.typo3.org/{1}.git ."'
+	for project in $list_of_projects
+	do
+		echo "$project"
+		project_dir="$(pwd)/$project"
+		echo mkdir -p "$project_dir"
+		echo cd "$project_dir"
+		echo git clone --recursive "git://git.typo3.org/$project.git" .
+	done
 else
-	# Execute commands
-	echo "$list_of_projects" \
-		| sed 's/ /\n/g' \
-		| parallel --jobs 1 "mkdir -p $(pwd)/{1}"
-
-	echo "$list_of_projects" \
-		| sed 's/ /\n/g' \
-		| parallel --jobs 2 "cd $(pwd)/{1}; echo {1}; git clone --recursive git://git.typo3.org/{1}.git ."
+	for project in $list_of_projects
+	do
+		echo "$project"
+		project_dir="$(pwd)/$project"
+		mkdir -p "$project_dir"
+		cd "$project_dir"
+		git clone --recursive "git://git.typo3.org/$project.git" .
+	done
 fi
