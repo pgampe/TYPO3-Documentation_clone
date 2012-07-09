@@ -4,6 +4,11 @@
 # Based on an idea by Fabien Udriot
 # see http://pastie.org/4225971
 
+# Gather ANSI escape codes.
+bold=$(tput bold)
+green=$(tput setaf 2)
+reset=$(tput sgr0)
+
 # Enter your username for typo3.org here. If no username is entered here, you
 # will be promted for it during execution.
 username=""
@@ -20,10 +25,7 @@ start_dir="$(pwd)"
 for project in $list_of_projects
 do
 	# Print out the project name in bold green.
-	echo -n $(tput setaf 2)
-	echo -n $(tput bold)
-	echo "$project"
-	echo -n $(tput sgr0)
+	echo "${bold}${green}${project}${reset}"
 
 	# Create a new directory for the git repository.
 	project_dir="$(pwd)/$project"
