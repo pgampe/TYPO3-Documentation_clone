@@ -43,9 +43,13 @@ else
 	for project in $list_of_projects
 	do
 		echo "$project"
+
+		# Create a new directory for the git repository.
 		project_dir="$(pwd)/$project"
 		mkdir -p "$project_dir"
 		cd "$project_dir"
+
+		# Clone the actual repository.
 		git clone --recursive "git://git.typo3.org/$project.git" .
 
 		# Return to the old directory.
