@@ -19,7 +19,9 @@ start_dir="$(pwd)"
 
 for project in $list_of_projects
 do
-	echo -n $(tput setf 2)
+	# Print out the project name in bold green.
+	echo -n $(tput setaf 2)
+	echo -n $(tput bold)
 	echo "$project"
 	echo -n $(tput sgr0)
 
