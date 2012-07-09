@@ -12,7 +12,7 @@ if [[ -z "$username" ]]; then
 	read -p "Please enter your typo3.org username: " -r username
 fi
 
-# Fetch the list of projects
+# Fetch the list of projects.
 list_of_projects="$(ssh "$username@review.typo3.org" -p 29418 "gerrit ls-projects" | grep -e "^Documentation/TYPO3")"
 
 start_dir="$(pwd)"
@@ -33,10 +33,10 @@ do
 	# Clone the actual repository.
 	git clone --recursive "git://git.typo3.org/$project.git" .
 
-	# Fetch gerrit commit hook
+	# Fetch gerrit commit hook.
 	scp -p -P 29418 "$username@review.typo3.org:hooks/commit-msg" .git/hooks/
 
-	# Init potential submodules
+	# Init potential submodules.
 	if [[ -n "$(git submodule status)" ]]
 	then
 		git submodule update --init
