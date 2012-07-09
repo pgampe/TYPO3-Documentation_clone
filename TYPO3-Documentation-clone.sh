@@ -8,7 +8,7 @@
 username=""
 dryrun=true
 
-if [[ -z "$USERNAME" ]]; then
+if [[ -z "$username" ]]; then
 	read -p "Please enter your typo3.org username: " -r username
 fi
 
