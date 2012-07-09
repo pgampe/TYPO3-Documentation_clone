@@ -25,13 +25,13 @@ then
 	echo "$list_of_projects" \
 		| sed 's/ /\n/g' \
 		| parallel --jobs 2 'echo "cd $(pwd)/{1}; echo {1}; git clone --recursive git://git.typo3.org/{1}.git ."'
+else
+	# Execute commands
+	echo "$list_of_projects" \
+		| sed 's/ /\n/g' \
+		| parallel --jobs 1 "mkdir -p $(pwd)/{1}"
+
+	echo "$list_of_projects" \
+		| sed 's/ /\n/g' \
+		| parallel --jobs 2 "cd $(pwd)/{1}; echo {1}; git clone --recursive git://git.typo3.org/{1}.git ."
 fi
-
-# Execute commands
-echo "$list_of_projects" \
-	| sed 's/ /\n/g' \
-	| parallel --jobs 1 "mkdir -p $(pwd)/{1}"
-
-echo "$list_of_projects" \
-	| sed 's/ /\n/g' \
-	| parallel --jobs 2 "cd $(pwd)/{1}; echo {1}; git clone --recursive git://git.typo3.org/{1}.git ."
