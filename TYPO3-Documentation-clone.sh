@@ -52,6 +52,16 @@ else
 		# Clone the actual repository.
 		git clone --recursive "git://git.typo3.org/$project.git" .
 
+		# Fetch gerrit commit hook
+		scp -p -P 29418 "$username@review.typo3.org:hooks/commit-msg" .git/hooks/
+
+		# Init potential submodules
+		if [[ -n "$(git submodule status)" ]]
+		then
+			git submodule update --init
+			git submodule foreach "scp -p -P 29418 \"$username@review.typo3.org:hooks/commit-msg\" .git/hooks/"
+		fi
+
 		# Return to the old directory.
 		cd "$start_dir"
 	done
