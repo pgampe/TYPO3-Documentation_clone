@@ -4,7 +4,8 @@
 # Based on an idea by Fabien Udriot
 # see http://pastie.org/4225971
 
-# Enter your username for typo3.org here
+# Enter your username for typo3.org here. If no username is entered here, you
+# will be promted for it during execution.
 username=""
 
 if [[ -z "$username" ]]; then
