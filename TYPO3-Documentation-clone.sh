@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Enter your username for typo3.org here
 USERNAME=""
 
