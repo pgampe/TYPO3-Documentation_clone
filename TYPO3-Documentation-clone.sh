@@ -4,7 +4,7 @@
 USERNAME=""
 
 if [[ -z "$USERNAME" ]]; then
-  readline -p "Please enter your typo3.org username: " -r USERNAME
+  read -p "Please enter your typo3.org username: " -r USERNAME
 fi
 
 # Fetch the list of projects
