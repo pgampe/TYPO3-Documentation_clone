@@ -11,6 +11,7 @@ if [[ -z "$username" ]]; then
 	read -p "Please enter your typo3.org username: " -r username
 fi
 
+# Asks the user if he wants to perform a dry run only.
 read -p "Do you want to actually run the commands? [y/N] " answer
 
 if [[ "$answer" = [yYjJ] ]]
