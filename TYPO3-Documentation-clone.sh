@@ -19,9 +19,9 @@ start_dir="$(pwd)"
 
 for project in $list_of_projects
 do
-	tput setf 2
+	echo -n $(tput setf 2)
 	echo "$project"
-	tput setf 7
+	echo -n $(tput tput sgr0)
 
 	# Create a new directory for the git repository.
 	project_dir="$(pwd)/$project"
