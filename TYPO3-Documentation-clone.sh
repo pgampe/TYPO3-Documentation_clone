@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # This script is in the public domain.
+# Based on an idea by Fabien Udriot
+# see http://pastie.org/4225971
 
 # Enter your username for typo3.org here
 username=""
