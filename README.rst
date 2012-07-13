@@ -6,7 +6,7 @@ TYPO3-Documentation-clone
 Clones all git repositories of the TYPO3 documentation.
 *******************************************************
 
-:Author: Philipp Gampe <dev@philippgame.info>,  Martin Ueding <dev@martin-ueding.de>
+:Author: Philipp Gampe <dev@philippgampe.info>,  Martin Ueding <dev@martin-ueding.de>
 :Date: 2012-07-09
 :Manual section: 1
 
