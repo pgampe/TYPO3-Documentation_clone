@@ -45,7 +45,7 @@ do
 		git submodule update --init
 		if [[ -d .git/modules ]]
 		then
-			git submodule foreach "scp -p -P 29418 \"$username@review.typo3.org:hooks/commit-msg\" $toplevel/.git/modules/$path/hooks/"
+			git submodule foreach "scp -p -P 29418 \"$username@review.typo3.org:hooks/commit-msg\" \$toplevel/.git/modules/\$path/hooks/"
 		else
 			git submodule foreach "scp -p -P 29418 \"$username@review.typo3.org:hooks/commit-msg\" .git/hooks/"
 		fi
