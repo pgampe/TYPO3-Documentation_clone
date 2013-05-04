@@ -36,7 +36,7 @@ do
 	git clone --recursive "git://git.typo3.org/$project.git" .
 
 	# Fetch gerrit commit hook.
-	scp -p -P 29418 "$username@review.typo3.org:hooks/commit-msg" .git/hooks/
+	scp -p -P 29418 "$username@review.typo3.org:hooks/commit-msg" .git/hooks/ && chmod +x .git/hooks/commit-msg
 
 	# Init potential submodules.
 	if [[ -n "$(git submodule status)" ]]
@@ -45,9 +45,9 @@ do
 		git submodule update --init
 		if [[ -d .git/modules ]]
 		then
-			git submodule foreach "scp -p -P 29418 \"$username@review.typo3.org:hooks/commit-msg\" \$toplevel/.git/modules/\$path/hooks/"
+			git submodule foreach "scp -p -P 29418 \"$username@review.typo3.org:hooks/commit-msg\" \$toplevel/.git/modules/\$path/hooks/ && chmod +x \$toplevel/.git/modules/\$path/hooks/commit-msg"
 		else
-			git submodule foreach "scp -p -P 29418 \"$username@review.typo3.org:hooks/commit-msg\" .git/hooks/"
+			git submodule foreach "scp -p -P 29418 \"$username@review.typo3.org:hooks/commit-msg\" .git/hooks/ && chmod +x .git/hooks/commit-msg"
 		fi
 	fi
 
