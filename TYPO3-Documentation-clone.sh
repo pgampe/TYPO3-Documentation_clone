@@ -41,8 +41,14 @@ do
 	# Init potential submodules.
 	if [[ -n "$(git submodule status)" ]]
 	then
+		git submodule sync
 		git submodule update --init
-		git submodule foreach "scp -p -P 29418 \"$username@review.typo3.org:hooks/commit-msg\" .git/hooks/"
+		if [[ -d .git/modules ]]
+		then
+			git submodule foreach "scp -p -P 29418 \"$username@review.typo3.org:hooks/commit-msg\" $toplevel/.git/modules/$path/hooks/"
+		else
+			git submodule foreach "scp -p -P 29418 \"$username@review.typo3.org:hooks/commit-msg\" .git/hooks/"
+		fi
 	fi
 
 	# Return to the old directory.
