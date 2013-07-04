@@ -20,6 +20,10 @@ fi
 # Fetch the list of projects.
 list_of_projects="$(ssh "$username@review.typo3.org" -p 29418 "gerrit ls-projects" | grep -e "^Documentation/TYPO3")"
 
+if [[ ${PIPESTATUS[0]} ]]; then
+	echo "${bold}You need to setup your http://review.typo3.org/ account with an SSH public key.${reset}"
+	exit 1
+
 start_dir="$(pwd)"
 
 for project in $list_of_projects
