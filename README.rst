@@ -15,7 +15,7 @@ SYNOPSIS
 
 ::
 
-    ./TYPO3-Documentation-clone
+    ./TYPO3-Documentation-clone.sh
 
 DESCRIPTION
 ===========
